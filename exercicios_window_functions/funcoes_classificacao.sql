@@ -121,7 +121,7 @@ select
     case
         when ntile(3) over (partition by e.employee_id order by SUM((od.quantity * od.unit_price) * (1 - od.discount))) = 1 then 'baixo'
         when ntile(3) over (partition by e.employee_id order by SUM((od.quantity * od.unit_price) * (1 - od.discount))) = 2 then 'médio'
-        else 'baixo'
+        else 'alto'
         end as faixa_de_valor
 from employees e
 inner join orders o on e.employee_id = o.employee_id

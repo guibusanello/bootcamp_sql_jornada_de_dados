@@ -27,7 +27,7 @@ window_function_name(arg1, arg2, ...) OVER (
 As funções de janela podem ser divididas em três categorias principais:
 
 - Funções de Classificação: RANK, DENSE_RANK, ROW_NUMBER, PERCENT_RANK, NTILE
-- Funções de Agregação: SUM, AVG, COUNT, MIN, MAX
+- Funções de Agregação com window functions: SUM, AVG, COUNT, MIN, MAX
 - Funções de Análise de Séries Temporais: LEAD, LAG, FIRST_VALUE, LAST_VALUE
 
 ### Funções de Classificação

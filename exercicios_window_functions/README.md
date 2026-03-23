@@ -46,4 +46,48 @@ Funções praticadas: `RANK`, `DENSE_RANK`, `ROW_NUMBER`, `PERCENT_RANK`, `NTILE
 10. **Análise completa de pedidos por funcionário** `ROW_NUMBER` `RANK` `DENSE_RANK` `PERCENT_RANK` `NTILE`
     Em uma única query, aplique as cinco funções sobre os pedidos particionados por funcionário: `ROW_NUMBER` para numeração sequencial por data, `RANK` e `DENSE_RANK` pelo valor do pedido dentro da carteira do funcionário, `PERCENT_RANK` para posição relativa e `NTILE(3)` para classificar os pedidos em baixo, médio e alto valor. O objetivo é ver as cinco funções operando lado a lado sobre o mesmo conjunto.
 
+## Exercícios — Funções de Agregação como Window Functions no Northwind (PostgreSQL)
 
+Funções praticadas: `SUM`, `AVG`, `COUNT`, `MIN`, `MAX`
+
+---
+
+## Básico — funções individuais
+
+1. **Total de vendas acumulado por funcionário** `SUM`
+   Para cada pedido, exiba o nome do funcionário, a data, o valor do pedido e o total acumulado de vendas daquele funcionário até aquela data. Use `SUM` como window function com janela crescente ordenada por `order_date`.
+
+2. **Média móvel do frete por cliente** `AVG`
+   Para cada pedido, exiba o ID do cliente, a data, o valor do frete e a média de frete considerando todos os pedidos daquele cliente até aquele momento. Use `AVG` com janela acumulada ordenada por `order_date`.
+
+3. **Contagem progressiva de pedidos por funcionário** `COUNT`
+   Para cada pedido, exiba o nome do funcionário, a data do pedido e quantos pedidos aquele funcionário havia realizado até aquele momento — incluindo o pedido atual. Use `COUNT` com janela acumulada.
+
+4. **Menor preço praticado por categoria** `MIN`
+   Para cada produto, exiba o nome, a categoria, o preço unitário e o menor preço entre todos os produtos daquela categoria. Use `MIN` particionado por categoria sem ordenação na janela.
+
+5. **Maior venda já registrada na carteira do funcionário** `MAX`
+   Para cada pedido, exiba o funcionário, o valor do pedido e o maior valor de pedido registrado na carteira daquele funcionário até aquele momento. Use `MAX` com janela acumulada ordenada por `order_date`.
+
+---
+
+## Intermediário — combinações e filtros
+
+6. **Comparação do frete de cada pedido com a média da rota** `AVG` `MIN` `MAX`
+   Para cada pedido, exiba o país de destino (`ship_country`), o valor do frete, a média, o menor e o maior frete já enviado para aquele país — tudo na mesma query, particionado por `ship_country` sem ordenação na janela.
+
+7. **Participação percentual de cada produto nas vendas da categoria** `SUM`
+   Para cada produto, exiba o nome, a categoria, o total vendido e qual percentual esse total representa sobre o total vendido da categoria inteira. Use `SUM` particionado por categoria sem ordenação para calcular o total da categoria, e divida o total do produto por ele.
+
+8. **Evolução do ticket médio por funcionário ao longo dos pedidos** `AVG` `COUNT`
+   Para cada pedido, exiba o funcionário, a data, o valor do pedido, a média acumulada dos valores dos pedidos daquele funcionário até aquela data e a quantidade acumulada de pedidos. Use `AVG` e `COUNT` com janela crescente ordenada por `order_date`.
+
+---
+
+## Avançado — análises combinadas
+
+9. **Painel de desempenho de produtos por categoria** `SUM` `AVG` `MIN` `MAX`
+   Para cada produto vendido, exiba o nome, a categoria, o total vendido, e — particionado por categoria — o total vendido pela categoria inteira, a média de vendas dos produtos da categoria, o produto mais vendido e o menos vendido da categoria. Use `SUM`, `AVG`, `MIN` e `MAX` como window functions sem ordenação na janela.
+
+10. **Análise completa de pedidos por funcionário** `SUM` `AVG` `COUNT` `MIN` `MAX`
+    Para cada pedido, exiba o funcionário, a data, o valor do pedido e — particionado por funcionário com janela acumulada ordenada por data — o total acumulado de vendas (`SUM`), a média acumulada dos pedidos (`AVG`), a contagem acumulada de pedidos (`COUNT`), o menor valor de pedido registrado até aquela data (`MIN`) e o maior (`MAX`). O objetivo é observar como as cinco funções evoluem linha a linha conforme os pedidos avançam no tempo.

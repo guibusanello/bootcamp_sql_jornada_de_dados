@@ -5,7 +5,7 @@ Repositório criado para armazenar os exercícios e projetos desenvolvidos duran
 ### Tecnologias Utilizadas
 
 - PostgreSQL
-- Docker Compose
+- Docker
 - VS Code
 - Git e GitHub
 

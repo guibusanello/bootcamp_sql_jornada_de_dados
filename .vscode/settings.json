@@ -56,6 +56,16 @@
       "name": "triggers",
       "database": "triggers",
       "username": "postgres"
+    },
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "acid",
+      "database": "acid",
+      "username": "postgres"
     }
   ]
 }

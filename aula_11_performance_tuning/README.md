@@ -99,3 +99,7 @@ SELECT
   MAX(engines.horse_power) as maximum_horse_power
 ORDER BY maximum_horse_power DESC
 LIMIT 2
+```
+
+
+O banco começa acessando a tabela `cars` e, em seguida, faz o JOIN com a tabela `engines`, combinando cada linha de `cars` com a linha correspondente em `engines` onde `engine_name` bate com `name`. Com esse conjunto combinado em mãos, o banco aplica o filtro do `WHERE`, descartando tudo que não for posterior a 2015 e fabricado na Alemanha. Sobre as linhas restantes, ele agrupa por fabricante, modelo, país e ano — cada grupo representando uma combinação única dessas quatro colunas. Para cada grupo, calcula o `MAX(horse_power)`. Aí aplica o `HAVING`, eliminando os grupos cuja potência máxima não ultrapassa 200. As linhas sobreviventes chegam ao `SELECT`, que projeta apenas as colunas pedidas e batiza o máximo de `maximum_horse_power`. O resultado é então ordenado de forma decrescente por essa potência, e por fim o `LIMIT` corta tudo, entregando apenas os 2 primeiros registros.
